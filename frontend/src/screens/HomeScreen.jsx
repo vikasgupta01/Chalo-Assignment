@@ -1,14 +1,10 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 
 const HomeScreen = () => {
-  const buttonClick = () => {
-    console.log("Chal Rhe...");
-  };
   return (
     <div>
-      <h1>Challo</h1>
-      <Button onClick={buttonClick}>Chale?</Button>
+      <h1>Home Screen</h1>
+      <p>Here we'll display list of saved routes</p>
     </div>
   );
 };

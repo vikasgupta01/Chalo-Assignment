@@ -13,8 +13,8 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Routes>
-            {/* <Route path="/stops" element={<StopsListScreen />} exact /> */}
-            {/* <Route path="/routes" element={<RoutesListScreen />} exact /> */}
+            <Route path="/stops" element={<StopsListScreen />} exact />
+            <Route path="/routes" element={<RoutesListScreen />} exact />
             <Route path="/" element={<HomeScreen />} exact />
           </Routes>
         </Container>
@@ -24,4 +24,6 @@ const App = () => {
   );
 };
 
+// /route/${route._id}/edit
+// /stop/${stop._id}/edit
 export default App;
