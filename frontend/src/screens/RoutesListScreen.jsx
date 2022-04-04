@@ -25,7 +25,6 @@ const RoutesListScreen = ({ history }) => {
 
   useEffect(() => {
     dispatch(listRoutes());
-    console.log("dispatch(listRoutes());");
   }, [dispatch, successDelete]);
 
   return (
@@ -44,7 +43,7 @@ const RoutesListScreen = ({ history }) => {
               <th>DIRECTION</th>
               <th>STATUS</th>
               <th>STOPS</th>
-              <th>EDIT/DELETE</th>
+              <th>VIEW/EDIT/DELETE</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +57,11 @@ const RoutesListScreen = ({ history }) => {
                   {route.listOfStopsInSeq.map((stop) => ` - ${stop.name} - `)}
                 </td>
                 <td>
+                  <LinkContainer to={`/route/${route._id}/view`}>
+                    <Button variant="success" className="btn-sm">
+                      View
+                    </Button>
+                  </LinkContainer>
                   <LinkContainer to={`/route/${route._id}/edit`}>
                     <Button variant="light" className="btn-sm">
                       Edit

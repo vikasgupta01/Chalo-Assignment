@@ -4,7 +4,10 @@ import {
   STOP_DELETE_FAIL,
   STOP_DELETE_REQUEST,
   STOP_DELETE_SUCCESS,
+  STOP_DETAILS_REQUEST,
   STOP_DETAILS_SUCCESS,
+  STOP_DETAILS_FAIL,
+  STOP_DETAILS_RESET,
   STOP_LIST_FAIL,
   STOP_LIST_REQUEST,
   STOP_LIST_SUCCESS,
@@ -70,6 +73,24 @@ export const listStops = (stop) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: STOP_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getStopDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: STOP_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/stops/${id}`);
+
+    dispatch({ type: STOP_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: STOP_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

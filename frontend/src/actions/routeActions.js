@@ -4,7 +4,9 @@ import {
   ROUTE_DELETE_FAIL,
   ROUTE_DELETE_REQUEST,
   ROUTE_DELETE_SUCCESS,
+  ROUTE_DETAILS_REQUEST,
   ROUTE_DETAILS_SUCCESS,
+  ROUTE_DETAILS_FAIL,
   ROUTE_LIST_FAIL,
   ROUTE_LIST_REQUEST,
   ROUTE_LIST_SUCCESS,
@@ -70,6 +72,24 @@ export const listRoutes = (route) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ROUTE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getRouteDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: ROUTE_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/routes/${id}`);
+
+    dispatch({ type: ROUTE_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ROUTE_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

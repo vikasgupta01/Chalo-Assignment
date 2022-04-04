@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
+import RouteEditScreen from "./screens/RouteEditScreen";
 import RoutesListScreen from "./screens/RoutesListScreen";
+import StopEditScreen from "./screens/StopEditScreen";
 import StopsListScreen from "./screens/StopsListScreen";
 
 const App = () => {
@@ -14,7 +16,9 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/stops" element={<StopsListScreen />} exact />
+            <Route path="/stop/:id/edit" element={<StopEditScreen />} exact />
             <Route path="/routes" element={<RoutesListScreen />} exact />
+            <Route path="/route/:id/edit" element={<RouteEditScreen />} exact />
             <Route path="/" element={<HomeScreen />} exact />
           </Routes>
         </Container>
