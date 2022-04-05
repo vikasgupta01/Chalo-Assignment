@@ -12,6 +12,7 @@ import {
   ROUTE_LIST_SUCCESS,
   ROUTE_REGISTER_FAIL,
   ROUTE_REGISTER_REQUEST,
+  ROUTE_REGISTER_RESET,
   ROUTE_REGISTER_SUCCESS,
   ROUTE_UPDATE_FAIL,
   ROUTE_UPDATE_REQUEST,
@@ -24,9 +25,11 @@ export const routeRegisterReducer = (state = {}, action) => {
     case ROUTE_REGISTER_REQUEST:
       return { loading: true };
     case ROUTE_REGISTER_SUCCESS:
-      return { loading: false, routeInfo: action.payload };
+      return { loading: false, routeInfo: action.payload, success: true };
     case ROUTE_REGISTER_FAIL:
       return { loading: false, error: action.payload };
+    case ROUTE_REGISTER_RESET:
+      return {};
     default:
       return state;
   }

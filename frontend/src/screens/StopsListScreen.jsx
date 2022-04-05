@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { deleteStop, listStops } from "../actions/stopActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -27,7 +30,16 @@ const StopsListScreen = () => {
 
   return (
     <>
-      <h1>Stops</h1>
+      <Row className="align-items-center">
+        <Col>
+          <h1>Stops</h1>
+        </Col>
+        <Col className="text-end">
+          <Link to="/stop/create" className="btn btn-light my-3">
+            Create Stop
+          </Link>
+        </Col>
+      </Row>
       {loading ? (
         <Loader />
       ) : error ? (

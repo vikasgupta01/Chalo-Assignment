@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
+import { Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { deleteRoute, listRoutes } from "../actions/routeActions";
+import { Link } from "react-router-dom";
+import {
+  deleteRoute,
+  listRoutes,
+  registerRoute,
+} from "../actions/routeActions";
 // import { deleteRoute, listRoutes } from "../actions/routeActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -22,13 +29,26 @@ const RoutesListScreen = ({ history }) => {
     }
   };
 
+  const createRouteHandler = () => {
+    dispatch(registerRoute());
+  };
+
   useEffect(() => {
     dispatch(listRoutes());
   }, [dispatch, successDelete]);
 
   return (
     <>
-      <h1>Routes</h1>
+      <Row className="align-items-center">
+        <Col>
+          <h1>Routes</h1>
+        </Col>
+        <Col className="text-end">
+          <Link to="/route/create" className="btn btn-light my-3">
+            Create Route
+          </Link>
+        </Col>
+      </Row>
       {loading ? (
         <Loader />
       ) : error ? (

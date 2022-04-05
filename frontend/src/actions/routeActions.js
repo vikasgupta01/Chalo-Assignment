@@ -18,7 +18,7 @@ import {
   ROUTE_UPDATE_SUCCESS,
 } from "../constants/routeConstants";
 
-export const register = (name, latitude, longitude) => async (dispatch) => {
+export const registerRoute = (route) => async (dispatch) => {
   try {
     dispatch({
       type: ROUTE_REGISTER_REQUEST,
@@ -30,11 +30,7 @@ export const register = (name, latitude, longitude) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      "/api/routes",
-      { name, latitude, longitude },
-      config
-    );
+    const { data } = await axios.post("/api/routes", route, config);
 
     dispatch({
       type: ROUTE_REGISTER_SUCCESS,

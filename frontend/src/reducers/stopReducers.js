@@ -12,6 +12,7 @@ import {
   STOP_LIST_SUCCESS,
   STOP_REGISTER_FAIL,
   STOP_REGISTER_REQUEST,
+  STOP_REGISTER_RESET,
   STOP_REGISTER_SUCCESS,
   STOP_UPDATE_FAIL,
   STOP_UPDATE_REQUEST,
@@ -24,9 +25,11 @@ export const stopRegisterReducer = (state = {}, action) => {
     case STOP_REGISTER_REQUEST:
       return { loading: true };
     case STOP_REGISTER_SUCCESS:
-      return { loading: false, stopInfo: action.payload };
+      return { loading: false, stopInfo: action.payload, success: true };
     case STOP_REGISTER_FAIL:
       return { loading: false, error: action.payload };
+    case STOP_REGISTER_RESET:
+      return {};
     default:
       return state;
   }

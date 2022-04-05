@@ -19,7 +19,7 @@ import {
   STOP_UPDATE_SUCCESS,
 } from "../constants/stopConstants";
 
-export const register = (name, latitude, longitude) => async (dispatch) => {
+export const registerStop = (stop) => async (dispatch) => {
   try {
     dispatch({
       type: STOP_REGISTER_REQUEST,
@@ -31,11 +31,7 @@ export const register = (name, latitude, longitude) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      "/api/stops",
-      { name, latitude, longitude },
-      config
-    );
+    const { data } = await axios.post("/api/stops", stop, config);
 
     dispatch({
       type: STOP_REGISTER_SUCCESS,
