@@ -57,8 +57,6 @@ const RouteEditScreen = () => {
       availableStopsArr.push({ value: stop._id, label: stop.name });
     });
     setAvailableStops(availableStopsArr);
-    console.log("availableStopsArr in useEffect: ", availableStopsArr);
-    console.log("stops in useEffect: ", stops);
   }, [stops]);
 
   const submitHandler = (e) => {
@@ -66,11 +64,7 @@ const RouteEditScreen = () => {
     let listOfStopDetailsInSequence = [];
     listOfStopsInSeq.forEach((stop) => {
       stops.forEach((element) => {
-        console.log("stop in submitHandler: ", stop);
-        console.log("element in submitHandler: ", element);
         if (element._id === stop) {
-          console.log("stop in submitHandler IF: ", stop);
-          console.log("element in submitHandler IF: ", element);
           listOfStopDetailsInSequence.push({
             name: element.name,
             latitude: element.latitude,
@@ -92,7 +86,6 @@ const RouteEditScreen = () => {
   };
 
   const updateStops = (e) => {
-    console.log("updateStops e: ", e);
     let selectedStops = [];
     e.forEach((stop) => {
       selectedStops.push(stop.value);

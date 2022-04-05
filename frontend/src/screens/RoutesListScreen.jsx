@@ -19,7 +19,6 @@ const RoutesListScreen = ({ history }) => {
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
       dispatch(deleteRoute(id));
-      console.log("dispatch(deleteRoute(id));");
     }
   };
 

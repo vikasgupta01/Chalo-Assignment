@@ -18,7 +18,6 @@ const StopsListScreen = () => {
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
       dispatch(deleteStop(id));
-      console.log("dispatch(deleteStop())");
     }
   };
 

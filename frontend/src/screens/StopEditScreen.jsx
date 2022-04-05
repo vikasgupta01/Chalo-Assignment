@@ -32,8 +32,6 @@ const StopEditScreen = () => {
       dispatch({ type: STOP_UPDATE_RESET });
       history("/stops");
     } else {
-      console.log("id: ", id);
-      console.log("stop._id: ", stop._id);
       if (!stop.name || stop._id !== id) {
         dispatch(getStopDetails(id));
       } else {

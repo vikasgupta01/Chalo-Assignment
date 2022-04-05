@@ -3,8 +3,10 @@ import React from "react";
 const HomeScreen = () => {
   return (
     <div>
-      <h1>Home Screen</h1>
-      <p>Here we'll display list of saved routes</p>
+      <p>
+        Welcome to Chalo webapp. Please use nav links to add/edit/view the stops
+        and routes.
+      </p>
     </div>
   );
 };
