@@ -1,44 +1,34 @@
 import {
+  DirectionsRenderer,
   GoogleMap,
   Marker,
   useJsApiLoader,
-  DirectionsRenderer,
 } from "@react-google-maps/api";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+// import dotenv from "dotenv";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getRouteDetails } from "../actions/routeActions";
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const RouteMapScreen = () => {
-  const history = useNavigate();
   const { id } = useParams();
   //   dotenv.config();
 
-  const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [distance, setDistance] = useState(null);
-  const [duration, setDuration] = useState(null);
 
   const clearRoute = () => {
     setDirectionsResponse(null);
-    setDistance("");
-    setDuration("");
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyA_oUhsYb3vIsUpBraI_HwZcTkZPofghow",
+    // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     // dotenv is not getting loaded properly, so providing the key here itself.
+    // This api key will be deleted later.
+    googleMapsApiKey: "AIzaSyA_oUhsYb3vIsUpBraI_HwZcTkZPofghow",
     libraries: ["places"],
   });
-
-  //   const [name, setName] = useState("");
-  //   const [direction, setDirection] = useState(true);
-  //   const [active, setActive] = useState(true);
-  //   const [listOfStopsInSeq, setListOfStopsInSeq] = useState([]);
-  //   const [availableStops, setAvailableStops] = useState([]);
 
   const dispatch = useDispatch();
   const routeDetails = useSelector((state) => state.routeDetails);
@@ -91,8 +81,6 @@ const RouteMapScreen = () => {
         });
         console.log("results in useEffect calculateRoute: ", results);
         setDirectionsResponse(results);
-        setDistance(results.routes[0].legs[0].distance.text);
-        setDuration(results.routes[0].legs[0].duration.text);
       } catch (error) {
         window.alert(error.message);
       }
@@ -109,6 +97,7 @@ const RouteMapScreen = () => {
         Go Back
       </Link>
       <h1>Route</h1>
+      {error && <Message variant="danger">{error}</Message>}
       {!isLoaded || loading ? (
         <Loader />
       ) : (

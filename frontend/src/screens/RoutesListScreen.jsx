@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
-import { Col } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Button, Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import {
-  deleteRoute,
-  listRoutes,
-  registerRoute,
-} from "../actions/routeActions";
+import { deleteRoute, listRoutes } from "../actions/routeActions";
 // import { deleteRoute, listRoutes } from "../actions/routeActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-const RoutesListScreen = ({ history }) => {
+const RoutesListScreen = () => {
   const dispatch = useDispatch();
 
   const routeList = useSelector((state) => state.routeList);
@@ -27,10 +21,6 @@ const RoutesListScreen = ({ history }) => {
     if (window.confirm("Are you sure?")) {
       dispatch(deleteRoute(id));
     }
-  };
-
-  const createRouteHandler = () => {
-    dispatch(registerRoute());
   };
 
   useEffect(() => {
