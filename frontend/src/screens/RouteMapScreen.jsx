@@ -63,8 +63,12 @@ const RouteMapScreen = () => {
       listOfRouteStopsInSeq.pop();
       const routeWayPoints = [];
       listOfRouteStopsInSeq.map((stop) => {
-        routeWayPoints.push({ lat: stop.latitude, lng: stop.longitude });
+        routeWayPoints.push({
+          location: { lat: stop.latitude, lng: stop.longitude },
+          stopover: false,
+        });
       });
+      console.log("route waypoints in MapScreen: ", routeWayPoints);
       const origin = {
         lat: route?.listOfStopsInSeq[0]?.latitude,
         lng: route?.listOfStopsInSeq[0]?.longitude,
@@ -77,16 +81,21 @@ const RouteMapScreen = () => {
       };
       // eslint-disable-next-line no-undef
       const directionsService = new google.maps.DirectionsService();
-      const results = await directionsService.route({
-        origin,
-        destination,
-        // eslint-disable-next-line no-undef
-        travelMode: "DRIVING",
-        // waypoints: routeWayPoints,
-      });
-      setDirectionsResponse(results);
-      setDistance(results.routes[0].legs[0].distance.text);
-      setDuration(results.routes[0].legs[0].duration.text);
+      try {
+        const results = await directionsService.route({
+          origin,
+          destination,
+          // eslint-disable-next-line no-undef
+          travelMode: google.maps.TravelMode.DRIVING,
+          waypoints: routeWayPoints,
+        });
+        console.log("results in useEffect calculateRoute: ", results);
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance.text);
+        setDuration(results.routes[0].legs[0].duration.text);
+      } catch (error) {
+        window.alert(error.message);
+      }
     };
     calculateRoute();
   }, [route]);
@@ -121,12 +130,16 @@ const RouteMapScreen = () => {
               mapTypeControl: true,
               fullscreenControl: true,
             }}
+            mapContainerClassName="map-container"
           >
-            {route?.listOfStopsInSeq?.map((stop) => (
-              <Marker position={{ lat: stop.latitude, lng: stop.longitude }} />
-            ))}
-            {directionsResponse && (
+            {directionsResponse ? (
               <DirectionsRenderer directions={directionsResponse} />
+            ) : (
+              route?.listOfStopsInSeq?.map((stop) => (
+                <Marker
+                  position={{ lat: stop.latitude, lng: stop.longitude }}
+                />
+              ))
             )}
           </GoogleMap>
         </div>

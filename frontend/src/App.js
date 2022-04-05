@@ -5,8 +5,10 @@ import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import RouteEditScreen from "./screens/RouteEditScreen";
 import RouteMapScreen from "./screens/RouteMapScreen";
+import RouteRegisterScreen from "./screens/RouteRegisterScreen";
 import RoutesListScreen from "./screens/RoutesListScreen";
 import StopEditScreen from "./screens/StopEditScreen";
+import StopRegisterScreen from "./screens/StopRegisterScreen";
 import StopsListScreen from "./screens/StopsListScreen";
 
 const App = () => {
@@ -17,8 +19,14 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/stops" element={<StopsListScreen />} exact />
+            <Route path="/stop/create" element={<StopRegisterScreen />} exact />
             <Route path="/stop/:id/edit" element={<StopEditScreen />} exact />
             <Route path="/routes" element={<RoutesListScreen />} exact />
+            <Route
+              path="/route/create"
+              element={<RouteRegisterScreen />}
+              exact
+            />
             <Route path="/route/:id/edit" element={<RouteEditScreen />} exact />
             <Route path="/route/:id/view" element={<RouteMapScreen />} exact />
             <Route path="/" element={<HomeScreen />} exact />
