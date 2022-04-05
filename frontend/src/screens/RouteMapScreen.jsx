@@ -11,16 +11,13 @@ import { Link, useParams } from "react-router-dom";
 import { getRouteDetails } from "../actions/routeActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { ROUTE_DETAILS_RESET } from "../constants/routeConstants";
 
 const RouteMapScreen = () => {
   const { id } = useParams();
   //   dotenv.config();
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
-
-  const clearRoute = () => {
-    setDirectionsResponse(null);
-  };
 
   const { isLoaded } = useJsApiLoader({
     // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -33,6 +30,13 @@ const RouteMapScreen = () => {
   const dispatch = useDispatch();
   const routeDetails = useSelector((state) => state.routeDetails);
   const { loading, error, route } = routeDetails;
+
+  const clearRoute = () => {
+    setDirectionsResponse(null);
+    dispatch({
+      type: ROUTE_DETAILS_RESET,
+    });
+  };
 
   useEffect(() => {
     dispatch(getRouteDetails(id));
