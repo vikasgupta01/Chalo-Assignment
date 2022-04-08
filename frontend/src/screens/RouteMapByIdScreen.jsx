@@ -56,12 +56,12 @@ const RouteMapScreen = () => {
       listOfRouteStopsInSeq.shift();
       listOfRouteStopsInSeq.pop();
       const routeWayPoints = [];
-      listOfRouteStopsInSeq.map((stop) => {
+      listOfRouteStopsInSeq.map((stop) =>
         routeWayPoints.push({
           location: { lat: stop.latitude, lng: stop.longitude },
           stopover: false,
-        });
-      });
+        })
+      );
       console.log("route waypoints in MapScreen: ", routeWayPoints);
       const origin = {
         lat: route?.listOfStopsInSeq[0]?.latitude,

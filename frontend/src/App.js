@@ -4,7 +4,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import RouteEditScreen from "./screens/RouteEditScreen";
-import RouteMapScreen from "./screens/RouteMapScreen";
+import RouteMapByIdScreen from "./screens/RouteMapByIdScreen";
+import RouteMapScreenWithDropdown from "./screens/RouteMapScreenWithDropdown";
 import RouteRegisterScreen from "./screens/RouteRegisterScreen";
 import RoutesListScreen from "./screens/RoutesListScreen";
 import StopEditScreen from "./screens/StopEditScreen";
@@ -23,12 +24,21 @@ const App = () => {
             <Route path="/stop/:id/edit" element={<StopEditScreen />} exact />
             <Route path="/routes" element={<RoutesListScreen />} exact />
             <Route
+              path="/routes/view"
+              element={<RouteMapScreenWithDropdown />}
+              exact
+            />
+            <Route
               path="/route/create"
               element={<RouteRegisterScreen />}
               exact
             />
             <Route path="/route/:id/edit" element={<RouteEditScreen />} exact />
-            <Route path="/route/:id/view" element={<RouteMapScreen />} exact />
+            <Route
+              path="/route/:id/view"
+              element={<RouteMapByIdScreen />}
+              exact
+            />
             <Route path="/" element={<HomeScreen />} exact />
           </Routes>
         </Container>
@@ -38,6 +48,4 @@ const App = () => {
   );
 };
 
-// /route/${route._id}/edit
-// /stop/${stop._id}/edit
 export default App;
