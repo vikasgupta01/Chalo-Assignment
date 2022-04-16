@@ -59,7 +59,7 @@ const RouteMapScreen = () => {
       listOfRouteStopsInSeq.map((stop) =>
         routeWayPoints.push({
           location: { lat: stop.latitude, lng: stop.longitude },
-          stopover: false,
+          // stopover: false,
         })
       );
       console.log("route waypoints in MapScreen: ", routeWayPoints);
